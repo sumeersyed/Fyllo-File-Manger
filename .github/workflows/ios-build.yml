@@ -43,8 +43,12 @@ jobs:
               exit 65
             }
 
-      - name: Package .IPA File
+      - name: Ad-Hoc Sign & Package .IPA File
         run: |
+          # Ad-hoc sign the app bundle so MobileInstallation & ios-deploy accept the bundle structure
+          codesign --force --deep --sign - build/Release-iphoneos/FylloFileManager.app
+          
+          # Create IPA package
           mkdir -p build/Payload
           cp -r build/Release-iphoneos/FylloFileManager.app build/Payload/
           cd build
