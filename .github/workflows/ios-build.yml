@@ -22,12 +22,13 @@ jobs:
           cd ios
           xcodebuild -list -project FylloFileManager.xcodeproj
 
-      - name: Build iOS App (Debug Simulator)
+      - name: Build iOS App
         run: |
           cd ios
-          xcodebuild build \
+          xcodebuild clean build \
             -project FylloFileManager.xcodeproj \
             -scheme FylloFileManager \
+            -sdk iphonesimulator \
             -destination "generic/platform=iOS Simulator" \
             -configuration Debug \
             CODE_SIGNING_ALLOWED=NO \

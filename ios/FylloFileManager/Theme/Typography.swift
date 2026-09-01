@@ -14,14 +14,14 @@ public struct AppTypography {
     }
     
     public static func subheadlineFont(isEInk: Bool = false) -> Font {
-        isEInk ? .system(.subheadline, design: .monospaced) : .system(.subheadline, design: .default)
+        isEInk ? .system(.subheadline, design: .monospaced) : .system(.subheadline, design: .`default`)
     }
     
     public static func bodyFont(isEInk: Bool = false) -> Font {
-        isEInk ? .system(.body, design: .monospaced) : .system(.body, design: .default)
+        isEInk ? .system(.body, design: .monospaced) : .system(.body, design: .`default`)
     }
     
     public static func captionFont(isEInk: Bool = false) -> Font {
-        isEInk ? .system(.caption, design: .monospaced) : .system(.caption, design: .default)
+        isEInk ? .system(.caption, design: .monospaced) : .system(.caption, design: .`default`)
     }
 }

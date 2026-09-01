@@ -42,7 +42,7 @@ public struct StorageInfoCard: View {
                     RoundedRectangle(cornerRadius: 6)
                         .fill(
                             LinearGradient(
-                                colors: [.neonPurple, .neonPink, .neonCyan],
+                                gradient: Gradient(colors: [.neonPurple, .neonPink, .neonCyan]),
                                 startPoint: .leading,
                                 endPoint: .trailing
                             )

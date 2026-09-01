@@ -38,7 +38,7 @@ public struct ActivityRingsView: View {
                     )
                     .rotationEffect(.degrees(-90))
                     .padding(currentInset)
-                    .animation(.spring(response: 0.8, dampingFraction: 0.7), value: ring.ratio)
+                    .animation(.spring(response: 0.8, dampingFraction: 0.7))
             }
         }
     }

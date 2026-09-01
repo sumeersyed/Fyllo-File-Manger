@@ -62,7 +62,7 @@ public struct AudioPlayerView: View {
                     Circle()
                         .fill(
                             LinearGradient(
-                                colors: [Color.darkSurfaceVariant, Color.black],
+                                gradient: Gradient(colors: [Color.darkSurfaceVariant, Color.black]),
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             )
@@ -93,7 +93,7 @@ public struct AudioPlayerView: View {
                         )
                 }
                 .rotationEffect(.degrees(rotationAngle))
-                .animation(player.isPlaying ? Animation.linear(duration: 8).repeatForever(autoreverses: false) : .default, value: rotationAngle)
+                .animation(player.isPlaying ? Animation.linear(duration: 8).repeatForever(autoreverses: false) : .`default`)
                 .onAppear {
                     if player.isPlaying {
                         rotationAngle = 360
