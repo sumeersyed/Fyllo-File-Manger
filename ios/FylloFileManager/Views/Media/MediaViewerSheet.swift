@@ -23,7 +23,7 @@ public struct MediaViewerSheet: View {
                     VideoPlayer(player: p)
                         .ignoresSafeArea()
                 } else {
-                    ProgressView().tint(.white)
+                    ProgressView().accentColor(.white)
                 }
             } else {
                 VStack(spacing: 16) {

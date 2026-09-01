@@ -60,7 +60,7 @@ public struct MediaView: View {
                 // Content Grid
                 if viewModel.isLoading {
                     Spacer()
-                    ProgressView().tint(.neonCyan)
+                    ProgressView().accentColor(.neonCyan)
                     Spacer()
                 } else if viewModel.mediaItems.isEmpty {
                     Spacer()

@@ -16,20 +16,17 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Select Xcode Version
-        run: sudo xcode-select -switch /Applications/Xcode_15.4.app/Contents/Developer
-
       - name: Show Xcode & SDK Info
         run: |
           xcodebuild -version
-          xcrun simctl list devicetypes
+          xcodebuild -list -project "ios/FylloFileManager.xcodeproj"
 
-      - name: Build iOS App (Simulator / Generic Device)
+      - name: Build iOS App (Release)
         run: |
-          xcodebuild build \
+          xcodebuild clean build \
             -project "ios/FylloFileManager.xcodeproj" \
             -scheme "FylloFileManager" \
-            -destination "generic/platform=iOS" \
+            -destination "generic/platform=iOS Simulator" \
             -configuration Release \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
@@ -40,4 +37,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: FylloFileManager-iOS-Build
-          path: build/Release-iphoneos/FylloFileManager.app
+          path: build/Release-iphonesimulator/FylloFileManager.app

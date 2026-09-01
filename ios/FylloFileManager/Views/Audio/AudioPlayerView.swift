@@ -130,7 +130,7 @@ public struct AudioPlayerView: View {
                         ),
                         in: 0...max(player.duration, 1.0)
                     )
-                    .tint(.neonGreen)
+                    .accentColor(.neonGreen)
                     
                     HStack {
                         Text(formatTime(player.currentTime))

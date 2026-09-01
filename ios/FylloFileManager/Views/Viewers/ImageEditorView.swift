@@ -40,7 +40,7 @@ public struct ImageEditorView: View {
                             .rotationEffect(.degrees(rotationAngle))
                             .padding()
                     } else {
-                        ProgressView().tint(.white)
+                        ProgressView().accentColor(.white)
                     }
                     
                     Spacer()
