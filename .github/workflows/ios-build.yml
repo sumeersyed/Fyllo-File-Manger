@@ -23,7 +23,8 @@ jobs:
 
       - name: Build iOS App (Release)
         run: |
-          xcodebuild clean build \
+          set -o pipefail
+          xcodebuild build \
             -project "ios/FylloFileManager.xcodeproj" \
             -scheme "FylloFileManager" \
             -destination "generic/platform=iOS Simulator" \
@@ -34,7 +35,9 @@ jobs:
             BUILD_DIR="build"
 
       - name: Archive and Upload Build Artifacts
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: FylloFileManager-iOS-Build
           path: build/Release-iphonesimulator/FylloFileManager.app
+          if-no-files-found: warn
