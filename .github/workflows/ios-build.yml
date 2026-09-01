@@ -1,4 +1,4 @@
-name: Build iOS App
+name: Build iOS App & IPA
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
 
 jobs:
   build-ios:
-    name: Build iOS Application (Swift & SwiftUI)
+    name: Build iOS Application & Package .IPA
     runs-on: macos-14
 
     steps:
@@ -22,15 +22,15 @@ jobs:
           cd ios
           xcodebuild -list -project FylloFileManager.xcodeproj
 
-      - name: Build iOS App
+      - name: Build iOS App for Device
         run: |
           cd ios
           xcodebuild clean build \
             -project FylloFileManager.xcodeproj \
             -scheme FylloFileManager \
-            -sdk iphonesimulator \
-            -destination "generic/platform=iOS Simulator" \
-            -configuration Debug \
+            -sdk iphoneos \
+            -destination "generic/platform=iOS" \
+            -configuration Release \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGN_IDENTITY="" \
@@ -43,12 +43,21 @@ jobs:
               exit 65
             }
 
-      - name: Archive and Upload Build Artifacts
+      - name: Package .IPA File
+        run: |
+          mkdir -p build/Payload
+          cp -r build/Release-iphoneos/FylloFileManager.app build/Payload/
+          cd build
+          zip -qr FylloFileManager.ipa Payload
+          ls -lh FylloFileManager.ipa
+
+      - name: Archive and Upload IPA Artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: FylloFileManager-iOS-Build
+          name: FylloFileManager-IPA
           path: |
-            build/Debug-iphonesimulator/FylloFileManager.app
+            build/FylloFileManager.ipa
+            build/Release-iphoneos/FylloFileManager.app
             build.log
           if-no-files-found: warn
