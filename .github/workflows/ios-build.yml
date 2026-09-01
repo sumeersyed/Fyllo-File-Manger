@@ -19,25 +19,27 @@ jobs:
       - name: Show Xcode & SDK Info
         run: |
           xcodebuild -version
-          xcodebuild -list -project "ios/FylloFileManager.xcodeproj"
+          cd ios
+          xcodebuild -list -project FylloFileManager.xcodeproj
 
-      - name: Build iOS App (Release)
+      - name: Build iOS App (Debug Simulator)
         run: |
-          set -o pipefail
+          cd ios
           xcodebuild build \
-            -project "ios/FylloFileManager.xcodeproj" \
-            -scheme "FylloFileManager" \
+            -project FylloFileManager.xcodeproj \
+            -scheme FylloFileManager \
             -destination "generic/platform=iOS Simulator" \
-            -configuration Release \
+            -configuration Debug \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGN_IDENTITY="" \
-            BUILD_DIR="build"
+            CODE_SIGN_STYLE=Manual \
+            BUILD_DIR="../build"
 
       - name: Archive and Upload Build Artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: FylloFileManager-iOS-Build
-          path: build/Release-iphonesimulator/FylloFileManager.app
+          path: build/Debug-iphonesimulator/FylloFileManager.app
           if-no-files-found: warn
