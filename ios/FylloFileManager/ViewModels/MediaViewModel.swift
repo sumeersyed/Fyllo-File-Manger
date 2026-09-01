@@ -21,21 +21,19 @@ public class MediaViewModel: ObservableObject {
         isLoading = true
         Task {
             await MediaService.shared.fetchAllMedia()
-            await MainActor.run {
-                switch self.currentCategory {
-                case .image:
-                    self.mediaItems = MediaService.shared.photosMedia
-                case .video:
-                    self.mediaItems = MediaService.shared.videosMedia
-                case .audio:
-                    self.mediaItems = MediaService.shared.audioMedia
-                case .document, .pdf:
-                    self.mediaItems = MediaService.shared.documentMedia
-                default:
-                    self.mediaItems = MediaService.shared.photosMedia + MediaService.shared.videosMedia
-                }
-                self.isLoading = false
+            switch self.currentCategory {
+            case .image:
+                self.mediaItems = MediaService.shared.photosMedia
+            case .video:
+                self.mediaItems = MediaService.shared.videosMedia
+            case .audio:
+                self.mediaItems = MediaService.shared.audioMedia
+            case .document, .pdf:
+                self.mediaItems = MediaService.shared.documentMedia
+            default:
+                self.mediaItems = MediaService.shared.photosMedia + MediaService.shared.videosMedia
             }
+            self.isLoading = false
         }
     }
     

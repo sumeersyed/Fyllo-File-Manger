@@ -43,7 +43,7 @@ public extension Color {
     // Theme Palette Provider
     static func primaryColor(for theme: ColorTheme) -> Color {
         switch theme {
-        case .default: return .neonPurple
+        case .`default`: return .neonPurple
         case .purple: return Color(hex: "9C27B0")
         case .pink: return Color(hex: "E91E63")
         case .oceanBlue: return Color(hex: "0288D1")
@@ -54,7 +54,7 @@ public extension Color {
     
     static func secondaryColor(for theme: ColorTheme) -> Color {
         switch theme {
-        case .default: return .neonCyan
+        case .`default`: return .neonCyan
         case .purple: return Color(hex: "E1BEE7")
         case .pink: return Color(hex: "F8BBD0")
         case .oceanBlue: return Color(hex: "80DEEA")
@@ -65,7 +65,7 @@ public extension Color {
     
     static func tertiaryColor(for theme: ColorTheme) -> Color {
         switch theme {
-        case .default: return .neonGreen
+        case .`default`: return .neonGreen
         case .purple: return Color(hex: "CE93D8")
         case .pink: return Color(hex: "F48FB1")
         case .oceanBlue: return Color(hex: "4DD0E1")
@@ -89,7 +89,7 @@ public extension Color {
         case .pink: return Color(hex: "2A0010")
         case .oceanBlue: return Color(hex: "001F2D")
         case .forestGreen: return Color(hex: "0A1F0C")
-        case .default: return .darkBackground
+        case .`default`: return .darkBackground
         case .eInk: return Color(hex: "1C1C1E")
         }
     }
@@ -109,7 +109,7 @@ public extension Color {
         case .pink: return Color(hex: "3F0018")
         case .oceanBlue: return Color(hex: "00334E")
         case .forestGreen: return Color(hex: "143818")
-        case .default: return .darkSurface
+        case .`default`: return .darkSurface
         case .eInk: return Color(hex: "2C2C2E")
         }
     }

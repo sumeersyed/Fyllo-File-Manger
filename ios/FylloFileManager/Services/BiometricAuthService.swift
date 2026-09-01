@@ -8,7 +8,6 @@ public class BiometricAuthService {
         case none
         case touchID
         case faceID
-        case opticID
     }
     
     public func biometricType() -> BiometricType {
@@ -21,7 +20,6 @@ public class BiometricAuthService {
             switch context.biometryType {
             case .faceID: return .faceID
             case .touchID: return .touchID
-            case .opticID: return .opticID
             case .none: return .none
             @unknown default: return .none
             }

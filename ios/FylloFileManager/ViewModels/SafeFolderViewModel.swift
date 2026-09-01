@@ -14,14 +14,12 @@ public class SafeFolderViewModel: ObservableObject {
         isAuthenticating = true
         Task {
             let result = await BiometricAuthService.shared.authenticate(reason: "Authenticate to access your Safe Vault")
-            await MainActor.run {
-                self.isAuthenticating = false
-                if result.success {
-                    self.isUnlocked = true
-                    self.loadVault()
-                } else {
-                    self.errorMessage = result.error?.localizedDescription ?? "Authentication failed"
-                }
+            self.isAuthenticating = false
+            if result.success {
+                self.isUnlocked = true
+                self.loadVault()
+            } else {
+                self.errorMessage = result.error?.localizedDescription ?? "Authentication failed"
             }
         }
     }

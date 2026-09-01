@@ -17,12 +17,10 @@ public class StorageCleanupViewModel: ObservableObject {
     public func startScan() {
         Task {
             await StorageCleanupService.shared.scanAll()
-            await MainActor.run {
-                self.junkFiles = StorageCleanupService.shared.junkFiles
-                self.largeFiles = StorageCleanupService.shared.largeFiles
-                self.duplicateGroups = StorageCleanupService.shared.duplicateGroups
-                self.totalJunkBytes = StorageCleanupService.shared.totalJunkBytes
-            }
+            self.junkFiles = StorageCleanupService.shared.junkFiles
+            self.largeFiles = StorageCleanupService.shared.largeFiles
+            self.duplicateGroups = StorageCleanupService.shared.duplicateGroups
+            self.totalJunkBytes = StorageCleanupService.shared.totalJunkBytes
         }
     }
     
@@ -30,10 +28,8 @@ public class StorageCleanupViewModel: ObservableObject {
         Task {
             let cleaned = await StorageCleanupService.shared.cleanAllJunk()
             let formatted = ByteCountFormatter.string(fromByteCount: cleaned, countStyle: .file)
-            await MainActor.run {
-                self.cleanupCompletedMessage = "Cleaned \(formatted) of junk files!"
-                self.startScan()
-            }
+            self.cleanupCompletedMessage = "Cleaned \(formatted) of junk files!"
+            self.startScan()
         }
     }
     

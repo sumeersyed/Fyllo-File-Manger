@@ -1,4 +1,17 @@
 import SwiftUI
+import UIKit
+
+public struct BlurView: UIViewRepresentable {
+    public var style: UIBlurEffect.Style = .systemThinMaterialDark
+    
+    public func makeUIView(context: Context) -> UIVisualEffectView {
+        UIVisualEffectView(effect: UIBlurEffect(style: style))
+    }
+    
+    public func updateUIView(_ uiView: UIVisualEffectView, context: Context) {
+        uiView.effect = UIBlurEffect(style: style)
+    }
+}
 
 public struct GlassCardModifier: ViewModifier {
     var cornerRadius: CGFloat = 16
@@ -8,12 +21,10 @@ public struct GlassCardModifier: ViewModifier {
     public func body(content: Content) -> some View {
         content
             .background(
-                RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-                    .fill(backgroundColor)
-                    .background(
-                        RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-                            .fill(.ultraThinMaterial)
-                    )
+                ZStack {
+                    BlurView(style: .systemThinMaterialDark)
+                    backgroundColor
+                }
             )
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
