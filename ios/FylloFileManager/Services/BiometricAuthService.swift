@@ -1,0 +1,47 @@
+import Foundation
+import LocalAuthentication
+
+public class BiometricAuthService {
+    public static let shared = BiometricAuthService()
+    
+    public enum BiometricType {
+        case none
+        case touchID
+        case faceID
+        case opticID
+    }
+    
+    public func biometricType() -> BiometricType {
+        let context = LAContext()
+        var error: NSError?
+        guard context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) else {
+            return .none
+        }
+        if #available(iOS 11.0, *) {
+            switch context.biometryType {
+            case .faceID: return .faceID
+            case .touchID: return .touchID
+            case .opticID: return .opticID
+            case .none: return .none
+            @unknown default: return .none
+            }
+        }
+        return .touchID
+    }
+    
+    public func authenticate(reason: String = "Unlock Fyllo File Manager") async -> (success: Bool, error: Error?) {
+        let context = LAContext()
+        var error: NSError?
+        
+        guard context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) else {
+            return (false, error)
+        }
+        
+        do {
+            let success = try await context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason)
+            return (success, nil)
+        } catch {
+            return (false, error)
+        }
+    }
+}

@@ -1,0 +1,43 @@
+name: Build iOS App
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build-ios:
+    name: Build iOS Application (Swift & SwiftUI)
+    runs-on: macos-14
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Select Xcode Version
+        run: sudo xcode-select -switch /Applications/Xcode_15.4.app/Contents/Developer
+
+      - name: Show Xcode & SDK Info
+        run: |
+          xcodebuild -version
+          xcrun simctl list devicetypes
+
+      - name: Build iOS App (Simulator / Generic Device)
+        run: |
+          xcodebuild build \
+            -project "ios/FylloFileManager.xcodeproj" \
+            -scheme "FylloFileManager" \
+            -destination "generic/platform=iOS" \
+            -configuration Release \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            BUILD_DIR="build"
+
+      - name: Archive and Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: FylloFileManager-iOS-Build
+          path: build/Release-iphoneos/FylloFileManager.app

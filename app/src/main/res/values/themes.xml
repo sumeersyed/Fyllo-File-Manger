@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="pitch_black">#000000</color>
+    <color name="splash_blue">#0961FC</color>
+    <style name="Theme.SFileManager" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@color/pitch_black</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowSplashScreenBackground">@color/pitch_black</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="android:windowSplashScreenIconBackgroundColor">@color/splash_blue</item>
+    </style>
+</resources>

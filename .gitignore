@@ -1,0 +1,23 @@
+# Gradle & Android
+.gradle/
+build/
+app/build/
+*.apk
+*.aab
+build_output*.txt
+build_log.txt
+local.properties
+
+# Xcode & iOS
+DerivedData/
+*.xcuserstate
+*.xcuserdatad
+xcuserdata/
+*.xcbkptlist
+*.ninja*
+.DS_Store
+
+# IDEs
+.idea/
+.vscode/
+*.iml
