@@ -113,7 +113,7 @@ public struct SafeFolderView: View {
                                     .listRowBackground(Color.darkSurfaceVariant)
                                 }
                             }
-                            .scrollContentBackground(.hidden)
+                            .hideScrollContentBackground()
                         }
                     }
                 }

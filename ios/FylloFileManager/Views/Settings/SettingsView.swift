@@ -72,7 +72,7 @@ public struct SettingsView: View {
                     }
                     .listRowBackground(Color.darkSurfaceVariant)
                 }
-                .scrollContentBackground(.hidden)
+                .hideScrollContentBackground()
             }
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)

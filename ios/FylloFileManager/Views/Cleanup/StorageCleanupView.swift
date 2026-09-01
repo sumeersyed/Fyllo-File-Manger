@@ -91,7 +91,7 @@ public struct StorageCleanupView: View {
                                 .listRowBackground(Color.darkSurfaceVariant)
                             }
                         }
-                        .scrollContentBackground(.hidden)
+                        .hideScrollContentBackground()
                     } else if selectedTab == 1 {
                         List {
                             ForEach(viewModel.largeFiles) { item in
@@ -115,7 +115,7 @@ public struct StorageCleanupView: View {
                                 .listRowBackground(Color.darkSurfaceVariant)
                             }
                         }
-                        .scrollContentBackground(.hidden)
+                        .hideScrollContentBackground()
                     } else {
                         List {
                             ForEach(viewModel.duplicateGroups) { group in
@@ -142,7 +142,7 @@ public struct StorageCleanupView: View {
                                 }
                             }
                         }
-                        .scrollContentBackground(.hidden)
+                        .hideScrollContentBackground()
                     }
                 }
             }

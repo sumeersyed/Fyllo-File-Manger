@@ -157,7 +157,7 @@ private struct MediaInfoSheet: View {
                     }
                     .listRowBackground(Color.darkSurfaceVariant)
                 }
-                .scrollContentBackground(.hidden)
+                .hideScrollContentBackground()
             }
             .navigationTitle("File Info")
             .navigationBarTitleDisplayMode(.inline)

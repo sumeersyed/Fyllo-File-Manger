@@ -52,4 +52,15 @@ public extension View {
     func neonGlow(color: Color, radius: CGFloat = 8) -> some View {
         self.modifier(NeonGlowModifier(color: color, radius: radius))
     }
+    
+    @ViewBuilder
+    func hideScrollContentBackground() -> some View {
+        if #available(iOS 16.0, *) {
+            self.scrollContentBackground(.hidden)
+        } else {
+            self.onAppear {
+                UITableView.appearance().backgroundColor = .clear
+            }
+        }
+    }
 }

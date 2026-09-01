@@ -58,7 +58,7 @@ public struct TrashView: View {
                             }
                         }
                     }
-                    .scrollContentBackground(.hidden)
+                    .hideScrollContentBackground()
                 }
             }
             .navigationTitle("Trash")

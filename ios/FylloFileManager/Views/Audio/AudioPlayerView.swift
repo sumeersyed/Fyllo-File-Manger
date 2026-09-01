@@ -240,7 +240,7 @@ private struct AudioPlaylistSheet: View {
                     }
                     .listRowBackground(Color.darkSurfaceVariant)
                 }
-                .scrollContentBackground(.hidden)
+                .hideScrollContentBackground()
             }
             .navigationTitle("Queue")
             .navigationBarTitleDisplayMode(.inline)

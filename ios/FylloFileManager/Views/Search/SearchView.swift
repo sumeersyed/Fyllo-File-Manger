@@ -92,7 +92,7 @@ public struct SearchView: View {
                                 .listRowBackground(Color.darkSurfaceVariant)
                             }
                         }
-                        .scrollContentBackground(.hidden)
+                        .hideScrollContentBackground()
                     }
                 }
             }

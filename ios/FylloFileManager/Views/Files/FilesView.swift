@@ -235,6 +235,86 @@ public struct FilesView: View {
                     .padding(.bottom, 90)
                 }
             }
+            // Custom Dialog Overlays (iOS 14+ Compatible)
+            if showingNewFolderAlert {
+                Color.black.opacity(0.6).ignoresSafeArea()
+                    .onTapGesture { showingNewFolderAlert = false }
+                
+                VStack(spacing: 16) {
+                    Text("New Folder")
+                        .font(.headline).bold()
+                        .foregroundColor(.white)
+                    
+                    TextField("Folder name", text: $newFolderName)
+                        .padding(10)
+                        .background(Color.white.opacity(0.1))
+                        .cornerRadius(8)
+                        .foregroundColor(.white)
+                    
+                    HStack(spacing: 16) {
+                        Button("Cancel") {
+                            showingNewFolderAlert = false
+                            newFolderName = ""
+                        }
+                        .foregroundColor(.gray)
+                        
+                        Spacer()
+                        
+                        Button("Create") {
+                            if !newFolderName.isEmpty {
+                                viewModel.createFolder(named: newFolderName)
+                                newFolderName = ""
+                                showingNewFolderAlert = false
+                            }
+                        }
+                        .font(.headline)
+                        .foregroundColor(.neonCyan)
+                    }
+                }
+                .padding(20)
+                .glassCard(cornerRadius: 20, strokeColor: Color.neonCyan.opacity(0.4), backgroundColor: Color.darkSurfaceVariant)
+                .padding(.horizontal, 36)
+            }
+            
+            if showingRenameAlert {
+                Color.black.opacity(0.6).ignoresSafeArea()
+                    .onTapGesture { showingRenameAlert = false }
+                
+                VStack(spacing: 16) {
+                    Text("Rename Item")
+                        .font(.headline).bold()
+                        .foregroundColor(.white)
+                    
+                    TextField("New name", text: $renameText)
+                        .padding(10)
+                        .background(Color.white.opacity(0.1))
+                        .cornerRadius(8)
+                        .foregroundColor(.white)
+                    
+                    HStack(spacing: 16) {
+                        Button("Cancel") {
+                            showingRenameAlert = false
+                            renameText = ""
+                        }
+                        .foregroundColor(.gray)
+                        
+                        Spacer()
+                        
+                        Button("Rename") {
+                            if let item = itemToRename, !renameText.isEmpty {
+                                viewModel.rename(item: item, to: renameText)
+                                renameText = ""
+                                showingRenameAlert = false
+                            }
+                        }
+                        .font(.headline)
+                        .foregroundColor(.neonCyan)
+                    }
+                }
+                .padding(20)
+                .glassCard(cornerRadius: 20, strokeColor: Color.neonCyan.opacity(0.4), backgroundColor: Color.darkSurfaceVariant)
+                .padding(.horizontal, 36)
+            }
         }
         .sheet(isPresented: $showingDocPicker) {
             DocumentPickerView { urls in
@@ -250,24 +330,6 @@ public struct FilesView: View {
             set: { _ in shareURL = nil }
         )) { item in
             ShareSheet(items: [item.url])
-        }
-        .alert("New Folder", isPresented: $showingNewFolderAlert) {
-            TextField("Folder name", text: $newFolderName)
-            Button("Create") {
-                if !newFolderName.isEmpty {
-                    viewModel.createFolder(named: newFolderName)
-                }
-            }
-            Button("Cancel", role: .cancel) {}
-        }
-        .alert("Rename", isPresented: $showingRenameAlert) {
-            TextField("New name", text: $renameText)
-            Button("Rename") {
-                if let item = itemToRename, !renameText.isEmpty {
-                    viewModel.rename(item: item, to: renameText)
-                }
-            }
-            Button("Cancel", role: .cancel) {}
         }
     }
 }

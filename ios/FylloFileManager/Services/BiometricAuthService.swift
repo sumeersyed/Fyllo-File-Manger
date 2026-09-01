@@ -35,11 +35,10 @@ public class BiometricAuthService {
             return (false, error)
         }
         
-        do {
-            let success = try await context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason)
-            return (success, nil)
-        } catch {
-            return (false, error)
+        return await withCheckedContinuation { continuation in
+            context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, evalError in
+                continuation.resume(returning: (success, evalError))
+            }
         }
     }
 }
